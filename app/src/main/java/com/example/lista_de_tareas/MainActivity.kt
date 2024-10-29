@@ -21,11 +21,9 @@ import com.google.firebase.firestore.firestore
 class MainActivity : ComponentActivity() {
 
     private val db: FirebaseFirestore = Firebase.firestore // Inicialización de Firestore
-    private lateinit var editTextTask: EditText
     private lateinit var recyclerView: RecyclerView
     private lateinit var tareaList: MutableList<Tarea> // Lista mutable para almacenar las tareas
     private lateinit var adapter: TareaAdapter // Adaptador para el RecyclerView
-    private lateinit var tareasListener: ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +50,18 @@ class MainActivity : ComponentActivity() {
         addButton.setOnClickListener {
             addNewTask()
         }
+        /*
+        val showPending: Button = findViewById(R.id.buttonShowPending)
+        addButton.setOnClickListener {
+            showPendingTasks()
+        }
+
+        val showCompleted: Button = findViewById(R.id.buttonShowCompleted)
+        addButton.setOnClickListener {
+            showCompletedTasks()
+        }
+
+         */
     }
 
     private fun loadTareas() {
@@ -175,5 +185,21 @@ class MainActivity : ComponentActivity() {
                 }
         }
     }
+    /*
+    private fun showPendingTasks() {
+        val pendingTasks = tareaList.filter { !it.isCompletada } // Filtra las tareas pendientes
+        tareaList.clear()
+        tareaList.addAll(pendingTasks) // Actualiza la lista principal
+        adapter.notifyDataSetChanged() // Notifica cambios al adaptador
+    }
+
+    private fun showCompletedTasks() {
+        val completedTasks = tareaList.filter { it.isCompletada } // Filtra las tareas completadas
+        tareaList.clear()
+        tareaList.addAll(completedTasks) // Actualiza la lista principal
+        adapter.notifyDataSetChanged() // Notifica cambios al adaptador
+    }
+
+     */
 
 }
